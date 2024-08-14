@@ -189,7 +189,7 @@
       speed: 600,
       autoplay: {
         delay: 3000,
-        disableOnInteraction: false,
+        disableOnInteraction: true,
       },
       slidesPerView: 3, // Show three recommendations per slide
       spaceBetween: 30, // Space between slides
@@ -240,6 +240,28 @@
       }
     })
   }
+  document.querySelectorAll('.navmenu a').forEach(navmenulink => {
+    navmenulink.addEventListener('click', function(e) {
+      if (!this.hash) return;
+      e.preventDefault();
+  
+      let section = document.querySelector(this.hash);
+      if (!section) return;
+  
+      let headerHeight = document.querySelector('#header').offsetHeight; // Get header height
+  
+      // Scroll smoothly to the section and then adjust for the header
+      window.scrollTo({
+        top: section.offsetTop - headerHeight, // Subtract header height to prevent overlap
+        behavior: 'smooth'
+      });
+  
+      // Add/remove 'active' class to highlight the current section
+      document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 

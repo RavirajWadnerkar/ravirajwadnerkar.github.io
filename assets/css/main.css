@@ -119,10 +119,13 @@ body {
 }
 
 /* Hide navigation menu on mobile */
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .header .navmenu,
   .mobile-nav-toggle {
     display: none;
+  }
+  .header.scrolled {
+    background: transparent;
   }
 }
 
@@ -198,7 +201,7 @@ body {
 }
 
 /* Responsive adjustments for Hero Section */
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   #hero {
     height: auto;
     padding: 100px 20px; 
@@ -255,7 +258,7 @@ body {
 }
 
 /* Responsive adjustments for Nav Menu */
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .navmenu ul {
     flex-direction: column;
     align-items: center;
@@ -382,7 +385,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   #about {
     padding: 30px 0; 
   }
@@ -491,7 +494,7 @@ body {
 }
 
 /* Responsive adjustments */
-@media (min-width: 768px) {
+@media (min-width: 767.98px) {
   #projects .row {
     display: flex;
     flex-wrap: wrap;
@@ -505,7 +508,7 @@ body {
 }
 
 /* Mobile adjustments */
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   #projects .row {
     display: flex;
     flex-direction: column;
@@ -627,7 +630,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   #experience .row {
     display: flex;
     flex-direction: column;
@@ -641,6 +644,10 @@ body {
 
   #experience .features-item {
     margin-bottom: 20px; 
+  }
+
+  #experience .features-item div{
+    padding-left: 10px; 
   }
 }
 
@@ -719,7 +726,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .toolkit-grid {
     flex-direction: column;
     align-items: center;
@@ -840,7 +847,7 @@ body {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   #testimonials .testimonial-item {
     width: 100%; 
     max-width: 100%;
@@ -1033,8 +1040,8 @@ body {
   }
 }
 
-/* Tablet (481px to 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
+/* Tablet (481px to 767.98px) */
+@media (min-width: 481px) and (max-width: 767.98px) {
   .header {
     flex-direction: column;
     padding: 15px;
