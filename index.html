@@ -23,7 +23,8 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--mono);overflow-x:hidden;cursor:none}
+html{background:#020408}
+body{background:transparent;color:var(--text);font-family:var(--mono);overflow-x:hidden;cursor:none}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--purple));border-radius:3px}
@@ -37,7 +38,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--mono);overflow-x:h
 
 /* CANVAS LAYERS */
 #mat{position:fixed;inset:0;z-index:0;opacity:.06;pointer-events:none}
-#pcv{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5}
+#pcv{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.85}
 .scl{position:fixed;inset:0;z-index:2;pointer-events:none;
   background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px)}
 
@@ -129,7 +130,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
 .panel{background:var(--panel);border:1px solid var(--border);border-radius:4px;position:relative;overflow:hidden}
 .panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5}
-.ptb{display:flex;align-items:center;gap:6px;padding:8px 13px;border-bottom:1px solid var(--border);font-size:10px;color:var(--tdim)}
+.ptb{display:flex;align-items:center;gap:6px;padding:8px 13px;border-bottom:1px solid var(--border);font-size:13px;color:var(--tdim)}
 .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .dr{background:#ff5f57;box-shadow:0 0 5px #ff5f57}
 .dy{background:#febc2e;box-shadow:0 0 5px #febc2e}
@@ -144,7 +145,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
 .stt .g{color:var(--green);text-shadow:var(--gg)}
 .stt .p{color:var(--purple);text-shadow:var(--gp)}
 .sl{width:78px;height:2px;margin:16px auto 0;background:linear-gradient(90deg,transparent,var(--cyan),var(--purple),transparent);box-shadow:0 0 8px var(--cyan)}
-.tcmd{font-size:11px;color:var(--tdim);margin-top:9px}
+.tcmd{font-size:13px;color:var(--tdim);margin-top:9px}
 .tcmd span{color:var(--green)}
 
 /* ══════════════ HERO ══════════════ */
@@ -160,45 +161,64 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
   height:38px;margin-bottom:20px;display:flex;align-items:center;gap:7px}
 .htpfx{color:var(--tdim)}
 #rtit{color:var(--green);text-shadow:var(--gg)}
-.hdesc{font-family:var(--raj);font-size:clamp(13px,1.4vw,15px);color:var(--tdim);line-height:1.9;max-width:520px;margin-bottom:26px}
+.hdesc{font-family:var(--raj);font-size:clamp(13px,1.4vw,15px);color:var(--green);line-height:1.9;max-width:520px;margin-bottom:26px}
 .hctas{display:flex;gap:12px;flex-wrap:wrap}
 .hstats{display:flex;gap:24px;margin-top:32px;flex-wrap:wrap}
 .stn{font-family:var(--orb);font-size:clamp(18px,2.5vw,32px);font-weight:700;color:var(--green);text-shadow:var(--gg)}
-.stl{font-size:9px;color:var(--tdim);letter-spacing:.1em;margin-top:2px}
+.stl{font-size:10px;color:var(--tdim);letter-spacing:.1em;margin-top:2px}
 /* scroll indicator */
 .sind{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;z-index:2}
 .sil{width:1px;height:36px;background:linear-gradient(var(--cyan),transparent);animation:sia 1.5s ease-in-out infinite}
 @keyframes sia{0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
 .sit{font-size:8px;color:var(--tdim);letter-spacing:.2em}
 
-/* ── ROBOT (completely rebuilt) ── */
-.hr{flex:0 0 auto;z-index:2;display:flex;flex-direction:column;align-items:center;gap:9px}
-#rw{width:clamp(180px,21vw,290px);position:relative}
+/* ── ROBOT (waving — friendly futuristic) ── */
+.hr{flex:0 0 auto;z-index:2;display:flex;flex-direction:column;align-items:center;gap:9px;perspective:1200px;perspective-origin:50% 45%}
+#rw{width:clamp(180px,21vw,290px);position:relative;transform-style:preserve-3d;will-change:transform;
+  transition:filter .4s}
+#rw:hover{filter:drop-shadow(0 0 38px rgba(0,245,255,.45))}
 
-@keyframes rBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-@keyframes rSway{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
-@keyframes rHead{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-3px)}}
-@keyframes rAL{0%,100%{transform:rotate(-22deg)}50%{transform:rotate(42deg)}}
-@keyframes rAR{0%,100%{transform:rotate(22deg)}50%{transform:rotate(-42deg)}}
-@keyframes rLL{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
-@keyframes rLR{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-10deg)}}
+/* gentle Apple-style easings: long durations, ease-in-out, layered timings */
+@keyframes rBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes rSway{0%,100%{transform:rotate(-.6deg)}50%{transform:rotate(.6deg)}}
+/* head: gentle nod (vertical) plus tiny side glance — no big rotation */
+@keyframes rHead{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-1.5px) rotate(1deg)}}
+/* RIGHT arm = the WAVING arm. Pivots at shoulder, swings hand side-to-side near "up" position.
+   Speed controlled via --waveDur custom prop (JS bumps it on cursor proximity).
+   Counter-clockwise rotation around (145,119) raises arm up & out to viewer's right (friendly wave).
+   Range: -125° (more vertical) to -160° (slightly past vertical-right) — hand sways at the top of the wave. */
+@keyframes rWave{
+  0%   {transform:rotate(-145deg)}
+  20%  {transform:rotate(-122deg)}
+  40%  {transform:rotate(-158deg)}
+  60%  {transform:rotate(-125deg)}
+  80%  {transform:rotate(-150deg)}
+  100% {transform:rotate(-145deg)}
+}
+/* LEFT arm = subtle idle, hangs by side, micro-sway */
+@keyframes rIdle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
+/* legs: STATIC standing pose (no stepping) — friendly idle */
 @keyframes eyeB{0%,87%,100%{transform:scaleY(1)}92%{transform:scaleY(.07)}}
 @keyframes antP{0%,100%{fill:#00f5ff;filter:drop-shadow(0 0 8px #00f5ff)}50%{fill:#ff00aa;filter:drop-shadow(0 0 14px #ff00aa)}}
 @keyframes scanLn{0%{transform:translateY(-100%)}100%{transform:translateY(220%)}}
 @keyframes rfloat{0%,100%{filter:drop-shadow(0 20px 28px rgba(0,245,255,.35))}50%{filter:drop-shadow(0 32px 50px rgba(0,245,255,.65))}}
 @keyframes chestPulse{0%,100%{opacity:.4}50%{opacity:1}}
-#rsvg{animation:rfloat 2.1s ease-in-out infinite}
-.rbg{animation:rBounce .88s ease-in-out infinite,rSway 1.76s ease-in-out infinite}
-.rhg{animation:rHead .88s ease-in-out infinite;transform-origin:100px 95px}
-.ral{animation:rAL .88s ease-in-out infinite;transform-origin:62px 160px}
-.rar{animation:rAR .88s ease-in-out infinite;transform-origin:138px 160px}
-.rll{animation:rLL .88s ease-in-out infinite;transform-origin:85px 222px}
-.rlr{animation:rLR .88s ease-in-out infinite;transform-origin:115px 222px}
-.rel{animation:eyeB 3.2s ease-in-out infinite;transform-origin:83px 65px}
-.rer{animation:eyeB 3.2s ease-in-out infinite .15s;transform-origin:117px 65px}
-.rant{animation:antP 1.1s ease-in-out infinite}
-.rscan{animation:scanLn 2.2s linear infinite}
-.rcpulse{animation:chestPulse .7s ease-in-out infinite}
+#rsvg{animation:rfloat 3.2s ease-in-out infinite;--waveDur:1.4s}
+/* slow, breath-like primary motion */
+.rbg{animation:rBounce 3.4s ease-in-out infinite, rSway 5.2s ease-in-out infinite}
+.rhg{animation:rHead 3.6s ease-in-out infinite;transform-origin:100px 95px}
+/* LEFT visual arm = .ral (kept idle); RIGHT visual arm = .rar (waves).
+   In SVG the "rar" group is on the viewer's right-hand side. We treat it as the robot's waving hand. */
+.ral{animation:rIdle 4.2s ease-in-out infinite;transform-origin:62px 122px}
+.rar{animation:rWave var(--waveDur,1.4s) cubic-bezier(.45,.05,.55,.95) infinite;transform-origin:145px 119px}
+/* legs — locked to standing pose (no animation) */
+.rll{transform-origin:85px 222px}
+.rlr{transform-origin:115px 222px}
+.rel{animation:eyeB 4.5s ease-in-out infinite;transform-origin:83px 65px}
+.rer{animation:eyeB 4.5s ease-in-out infinite .12s;transform-origin:117px 65px}
+.rant{animation:antP 1.8s ease-in-out infinite}
+.rscan{animation:scanLn 3s linear infinite}
+.rcpulse{animation:chestPulse 1.4s ease-in-out infinite}
 
 /* wave bars */
 .rwv{display:flex;align-items:center;gap:3px;height:28px}
@@ -207,7 +227,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
 .rlbl{font-size:9px;color:var(--cyan);letter-spacing:.2em;text-shadow:var(--gc)}
 
 /* ══════════════ EXPERIENCE ══════════════ */
-#experience{background:var(--bg2)}
+#experience{background:rgba(4,11,14,.55)}
 .expg{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1180px;margin:0 auto}
 .mp{background:var(--panel);border:1px solid var(--borderc);border-radius:4px;padding:26px;position:relative;overflow:hidden}
 .mp::after{content:'';position:absolute;top:-60%;left:-60%;width:220%;height:220%;
@@ -217,13 +237,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
   font-family:var(--orb);font-size:10px;color:var(--cyan);letter-spacing:.13em;box-shadow:var(--gc)}
 .cbdg2{border-color:var(--purple);color:var(--purple);box-shadow:var(--gp)}
 .cbdg3{border-color:var(--orange);color:var(--orange)}
-.erole{font-family:var(--orb);font-size:clamp(14px,1.9vw,21px);color:#fff;margin-bottom:4px}
+.erole{font-family:var(--orb);font-size:clamp(14px,1.9vw,21px);color:#fff;margin-bottom:6px}
 .eperiod{font-size:10px;color:var(--purple);letter-spacing:.1em;margin-bottom:16px;text-shadow:var(--gp)}
 .elist{list-style:none}
-.elist li{padding:6px 0;border-bottom:1px solid rgba(0,255,65,.06);font-size:12px;color:var(--tdim);line-height:1.75;display:flex;gap:8px}
+.elist li{padding:6px 0;border-bottom:1px solid rgba(0,255,65,.06);font-size:13px;color:var(--green);line-height:1.75;display:flex;gap:8px}
 .elist li::before{content:'▸';color:var(--cyan);flex-shrink:0}
 .slist{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.stag{padding:3px 9px;border:1px solid rgba(191,0,255,.28);font-size:9px;color:var(--purple);letter-spacing:.09em;border-radius:2px;transition:all .2s}
+.stag{padding:3px 9px;border:1px solid rgba(191,0,255,.28);font-size:10px;color:var(--purple);letter-spacing:.09em;border-radius:2px;transition:all .2s}
 .stag:hover{border-color:var(--purple);box-shadow:var(--gp);color:#fff}
 .stagc{border-color:rgba(0,245,255,.22);color:var(--cyan)}
 .stagc:hover{border-color:var(--cyan);box-shadow:var(--gc)}
@@ -240,28 +260,53 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
 .tli{position:relative;margin-bottom:20px;padding:13px 16px;background:rgba(0,8,4,.6);border:1px solid var(--border);border-radius:4px;transition:border-color .3s}
 .tli:hover{border-color:var(--cyan)}
 .tli::before{content:'';position:absolute;left:-32px;top:16px;width:11px;height:11px;border-radius:50%;background:var(--cyan);box-shadow:var(--gc);border:2px solid var(--bg)}
-.tldt{font-size:9px;color:var(--cyan);letter-spacing:.1em}
-.tltit{font-family:var(--raj);font-size:13px;font-weight:600;color:#fff;margin:3px 0 4px}
-.tldsc{font-size:11px;color:var(--tdim);line-height:1.6}
+.tli.tlrev:first-child::before{background:var(--green);box-shadow:var(--gg);animation:tldp 1.6s infinite}
+@keyframes tldp{0%,100%{box-shadow:var(--gg)}50%{box-shadow:0 0 18px rgba(0,255,65,.9),0 0 32px rgba(0,255,65,.5)}}
+.tldt{font-size:10px;color:var(--cyan);letter-spacing:.1em}
+.tltit{font-family:var(--raj);font-size:14px;font-weight:600;color:#fff;margin:3px 0 4px}
+.tldsc{font-size:12px;color:var(--green);line-height:1.6}
 .fbdg{position:absolute;top:22px;right:22px;font-size:9px;color:var(--green);border:1px solid var(--green);padding:3px 8px;letter-spacing:.13em;animation:fbp 2s infinite}
 @keyframes fbp{0%,100%{box-shadow:var(--gg)}50%{box-shadow:0 0 16px rgba(0,255,65,.6)}}
+/* recruiter-friendly timeline cards (latest → oldest) */
+.tli.tlrev{display:grid;grid-template-columns:62px 1fr;gap:14px;align-items:flex-start;padding:14px 16px;
+  opacity:0;transform:translateX(-22px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1),border-color .3s,box-shadow .3s}
+.tli.tlrev.tlvis{opacity:1;transform:translateX(0)}
+.tli.tlrev:nth-child(1).tlvis{transition-delay:.05s}
+.tli.tlrev:nth-child(2).tlvis{transition-delay:.13s}
+.tli.tlrev:nth-child(3).tlvis{transition-delay:.21s}
+.tli.tlrev:nth-child(4).tlvis{transition-delay:.29s}
+.tli.tlrev:nth-child(5).tlvis{transition-delay:.37s}
+.tli.tlrev:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(0,245,255,.18);transform:translateX(2px)}
+.tlyr{font-family:var(--orb);font-size:13px;font-weight:700;color:var(--cyan);
+  letter-spacing:.05em;text-shadow:var(--gc);text-align:right;padding-top:1px;
+  border-right:1px solid rgba(0,245,255,.18);padding-right:10px;line-height:1.2}
+.tli.tlrev:first-child .tlyr{color:var(--green);text-shadow:var(--gg);border-right-color:rgba(0,255,65,.3)}
+.tlbody{min-width:0}
+.tli.tlrev .tldt{font-size:9px;color:var(--purple);letter-spacing:.12em;margin-bottom:3px;text-shadow:var(--gp)}
+.tli.tlrev .tltit{font-family:var(--raj);font-size:14px;font-weight:600;color:#fff;margin-bottom:3px;line-height:1.35}
+.tli.tlrev .tldsc{font-size:11px;color:var(--green);line-height:1.55}
+@media(max-width:520px){
+  .tli.tlrev{grid-template-columns:50px 1fr;gap:10px;padding:12px}
+  .tlyr{font-size:11px;padding-right:7px}
+  .tli.tlrev .tltit{font-size:13px}
+}
 
 /* ══════════════ PROJECTS ══════════════ */
-#projects{background:var(--bg)}
+#projects{background:rgba(2,4,8,.55)}
 .pfltr{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:36px}
-.pfb{padding:5px 14px;border:1px solid var(--border);font-size:10px;color:var(--tdim);
+.pfb{padding:5px 14px;border:1px solid honeydew;font-size:10px;color:peachpuff;
   background:transparent;cursor:pointer;letter-spacing:.1em;transition:all .2s;border-radius:2px;font-family:var(--mono)}
 .pfb:hover,.pfb.on{border-color:var(--cyan);color:var(--cyan);box-shadow:var(--gc);background:rgba(0,245,255,.05)}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;max-width:1180px;margin:0 auto}
 .pc{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:22px;
   position:relative;overflow:hidden;cursor:pointer;transition:all .3s;transform-style:preserve-3d}
 .pc:hover{border-color:var(--cyan);box-shadow:0 0 26px rgba(0,245,255,.16),inset 0 0 26px rgba(0,245,255,.04);transform:translateY(-5px) rotateX(1.5deg)}
-.pnum{font-family:var(--orb);font-size:9px;color:rgba(0,255,65,.18);letter-spacing:.18em;margin-bottom:12px}
+.pnum{font-family:var(--orb);font-size:9px;color:#fff;letter-spacing:.18em;margin-bottom:12px}
 .pico{font-size:28px;margin-bottom:12px;display:block}
-.ptit{font-family:var(--orb);font-size:13px;color:#fff;margin-bottom:7px;line-height:1.35}
-.pdsc{font-family:var(--raj);font-size:12px;color:var(--tdim);line-height:1.8;margin-bottom:15px}
+.ptit{font-family:var(--orb);font-size:17px;color:#fff;margin-bottom:7px;line-height:1.35}
+.pdsc{font-family:var(--raj);font-size:15px;color:var(--green);line-height:1.8;margin-bottom:15px}
 .ptags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:15px}
-.ptag{padding:2px 7px;border:1px solid rgba(0,255,65,.16);font-size:8px;color:var(--gdim);letter-spacing:.09em;border-radius:2px}
+.ptag{padding:2px 7px;border:1px solid rgba(0,255,65,.16);font-size:11px;color:var(--gdim);letter-spacing:.09em;border-radius:2px}
 .ptag.ai{border-color:rgba(191,0,255,.28);color:var(--purple)}
 .ptag.cloud{border-color:rgba(0,245,255,.25);color:var(--cyan)}
 .ptag.robotics{border-color:rgba(255,110,0,.28);color:var(--orange)}
@@ -277,7 +322,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
 .pc:hover .pbar{transform:scaleX(1)}
 
 /* ══════════════ SKILLS ══════════════ */
-#skills{background:var(--bg2)}
+#skills{background:rgba(4,11,14,.55)}
 .skt{background:#000;border:1px solid var(--green);border-radius:6px;overflow:hidden;
   box-shadow:0 0 36px rgba(0,255,65,.08);max-width:880px;margin:0 auto}
 .skbar{background:#090909;padding:8px 13px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);font-size:10px;color:var(--tdim)}
@@ -304,12 +349,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;ali
 .aico{font-size:14px;filter:grayscale(1) brightness(.35)}
 
 /* ══════════════ CONTACT ══════════════ */
-#contact{background:var(--bg)}
+#contact{background:rgba(2,4,8,.55)}
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:940px;margin:0 auto}
 .cform{background:var(--panel);border:1px solid var(--border);border-radius:4px;overflow:hidden}
 .cfbody{padding:22px}
 .fg{margin-bottom:16px}
-.fl{display:block;font-size:10px;color:var(--green);letter-spacing:.12em;margin-bottom:6px}
+.fl{display:block;font-size:14px;color:var(--green);letter-spacing:.12em;margin-bottom:6px}
 .fi{width:100%;background:rgba(0,10,5,.8);border:1px solid var(--border);border-radius:3px;
   color:var(--text);font-family:var(--mono);font-size:12px;padding:9px 13px;outline:none;transition:border-color .2s,box-shadow .2s}
 .fi:focus{border-color:var(--cyan);box-shadow:var(--gc),inset 0 0 18px rgba(0,245,255,.04)}
@@ -319,10 +364,45 @@ textarea.fi{resize:vertical;min-height:96px}
 .fsub:hover{background:rgba(0,255,65,.09);box-shadow:var(--gg)}
 #fst{margin-top:9px;font-size:11px;text-align:center;min-height:18px}
 .fok{color:var(--green)}.ferr{color:var(--pink)}
+/* loading button state */
+.fsub{display:flex;align-items:center;justify-content:center;gap:8px}
+.fsub.snd{color:var(--cyan);border-color:var(--cyan);box-shadow:var(--gc);cursor:wait;pointer-events:none}
+.fsub.snd .fsubt{display:none}
+.fsubl{display:none;align-items:center;gap:5px}
+.fsub.snd .fsubl{display:inline-flex}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:var(--gc);animation:lbnc 1s infinite ease-in-out}
+.ldot:nth-child(2){animation-delay:.15s}
+.ldot:nth-child(3){animation-delay:.3s}
+@keyframes lbnc{0%,80%,100%{transform:scale(.5);opacity:.4}40%{transform:scale(1);opacity:1}}
+/* result toast / popup */
+#ftoast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);
+  z-index:9500;min-width:min(360px,86vw);padding:24px 30px;border-radius:6px;
+  background:rgba(2,4,8,.97);backdrop-filter:blur(14px);
+  text-align:center;font-family:var(--orb);letter-spacing:.14em;
+  opacity:0;pointer-events:none;transition:opacity .35s,transform .35s cubic-bezier(.34,1.56,.64,1)}
+#ftoast.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
+#ftoast.ok{border:1px solid var(--green);box-shadow:var(--gg),0 0 60px rgba(0,255,65,.3)}
+#ftoast.bad{border:1px solid var(--pink);box-shadow:0 0 30px rgba(255,0,170,.7),0 0 60px rgba(255,0,170,.3)}
+.ftico{font-size:42px;margin-bottom:12px;display:block}
+#ftoast.ok .ftico{color:var(--green);text-shadow:var(--gg);animation:tpop .5s cubic-bezier(.34,1.56,.64,1)}
+#ftoast.bad .ftico{color:var(--pink)}
+@keyframes tpop{from{transform:scale(0) rotate(-180deg)}to{transform:scale(1) rotate(0)}}
+.ftttl{font-size:14px;margin-bottom:8px}
+#ftoast.ok .ftttl{color:var(--green)}
+#ftoast.bad .ftttl{color:var(--pink)}
+.ftsub{font-family:var(--mono);font-size:11px;color:var(--tmid);letter-spacing:.05em;line-height:1.6}
+.ftcls{margin-top:16px;padding:7px 22px;background:transparent;font-family:var(--orb);
+  font-size:10px;letter-spacing:.16em;cursor:pointer;transition:all .2s}
+#ftoast.ok .ftcls{border:1px solid var(--green);color:var(--green)}
+#ftoast.ok .ftcls:hover{background:rgba(0,255,65,.1);box-shadow:var(--gg)}
+#ftoast.bad .ftcls{border:1px solid var(--pink);color:var(--pink)}
+#ftoast.bad .ftcls:hover{background:rgba(255,0,170,.1)}
+#ftbg{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);z-index:9499;opacity:0;pointer-events:none;transition:opacity .3s}
+#ftbg.show{opacity:1;pointer-events:auto}
 .clinks{display:flex;flex-direction:column;gap:10px}
 .clnk{display:flex;align-items:center;gap:12px;padding:12px 16px;
   background:rgba(0,8,4,.8);border:1px solid var(--border);border-radius:4px;
-  text-decoration:none;color:var(--text);transition:all .25s;font-size:12px}
+  text-decoration:none;color:var(--text);transition:all .25s;font-size:16px}
 .clnk:hover{border-color:var(--cyan);box-shadow:var(--gc);color:var(--cyan);padding-left:21px}
 .clnk .ci{font-size:15px;width:20px;text-align:center}
 .clnk .cl{flex:1;font-family:var(--raj)}
@@ -380,6 +460,15 @@ footer .fl2{color:var(--green)}
   <button class="eecls" onclick="document.getElementById('ee').classList.remove('show')">// EXIT ROBOT MODE</button>
 </div>
 
+<!-- Form result toast -->
+<div id="ftbg" onclick="closeToast()"></div>
+<div id="ftoast" role="alert" aria-live="polite">
+  <span class="ftico" id="ftico">✓</span>
+  <div class="ftttl" id="ftttl">TRANSMISSION SUCCESSFUL</div>
+  <div class="ftsub" id="ftsub">// signal received · response inbound &lt; 24h</div>
+  <button class="ftcls" onclick="closeToast()">// CLOSE</button>
+</div>
+
 <!-- XP Bar -->
 <div id="xpbar">
   <span class="xpl">// XP</span>
@@ -427,17 +516,17 @@ footer .fl2{color:var(--green)}
     </div>
     <p class="hdesc">Building intelligent robots and elegant software at the intersection of Robotics, AI, and Cloud Engineering.
       Currently at <span style="color:var(--cyan)">Synphony</span> working on VLA models &amp; robotic arms.
-      MS Software Engineering @ <span style="color:var(--green)">SJSU</span> (GPA 3.74).</p>
+      MS Software Engineering @ <span style="color:var(--green)">SJSU</span>.</p>
     <div class="hctas">
       <a href="#projects" class="btn btc">▶ PROJECTS</a>
       <a href="#contact" class="btn btg">⟳ CONTACT</a>
-      <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="btn btp" onclick="xpAward(20,'GitHub Visited')">⌥ GITHUB</a>
+      <a href="https://github.com/ravirajwadnerkar" target="_blank" class="btn btp" onclick="xpAward(20,'GitHub Visited')">⌥ GITHUB</a>
     </div>
     <div class="hstats">
       <div><div class="stn" data-target="3">0</div><div class="stl">YEARS EXP</div></div>
       <div><div class="stn" data-target="8">0<span>+</span></div><div class="stl">PROJECTS</div></div>
       <div><div class="stn" data-target="3">0</div><div class="stl">COMPANIES</div></div>
-      <div><div class="stn" data-target="374">0<span style="font-size:.55em">/400</span></div><div class="stl">MS GPA×100</div></div>
+      <div><div class="stn" data-target="3.74">0<span style="font-size:.55em">/4</span></div><div class="stl">MS GPA</div></div>
     </div>
   </div>
 
@@ -619,7 +708,7 @@ footer .fl2{color:var(--green)}
 <hr class="nhr">
 
 <!-- ══════════ EXPERIENCE ══════════ -->
-<section id="experience" class="sp" style="background:var(--bg2)">
+<section id="experience" class="sp">
   <div class="sh rev">
     <span class="st">// MISSION CONTROL</span>
     <h2 class="stt">WORK <span class="c">EXPERIENCE</span></h2>
@@ -652,7 +741,7 @@ footer .fl2{color:var(--green)}
     <!-- SNAP + IDx stacked -->
     <div style="display:flex;flex-direction:column;gap:16px">
       <div class="mp revr" style="padding:22px">
-        <div class="cbdg cbdg2"><div class="dot" style="width:7px;height:7px;background:var(--purple);box-shadow:var(--gp)"></div>SNAP LIFESCIENCES · SAN JOSE</div>
+        <div class="cbdg cbdg2"><div class="dot" style="width:7px;height:7px;background:var(--purple);box-shadow:var(--gp)"></div>SNAP LIFESCIENCES · SAN JOSE, CA</div>
         <div class="erole" style="font-size:clamp(13px,1.7vw,18px)">AI Research Intern</div>
         <div class="eperiod">▸ OCT 2025 — MAR 2026</div>
         <ul class="elist">
@@ -690,7 +779,7 @@ footer .fl2{color:var(--green)}
         <div class="mgrid">
           <div class="mc"><div class="mn counter" data-target="3">0</div><div class="mu">COMPANIES</div><div class="md">WORKED ACROSS</div></div>
           <div class="mc"><div class="mn counter" data-target="15">0</div><div class="mu">+ ENDPOINTS</div><div class="md">API AUTOMATED</div></div>
-          <div class="mc"><div class="mn counter" data-target="374">0</div><div class="mu">/400 GPA</div><div class="md">SJSU MASTERS</div></div>
+          <div class="mc"><div class="mn counter" data-target="3.74">0</div><div class="mu">/4 GPA</div><div class="md">SJSU MASTERS</div></div>
           <div class="mc"><div class="mn counter" data-target="8">0</div><div class="mu">+ PROJECTS</div><div class="md">SHIPPED</div></div>
         </div>
       </div>
@@ -699,11 +788,11 @@ footer .fl2{color:var(--green)}
       <div class="ptb"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><span>git log --all --oneline</span></div>
       <div style="padding:16px">
         <div class="tl">
-          <div class="tli"><div class="tldt">2018 – 2022</div><div class="tltit">B.E. CS · Gujarat Technological University</div><div class="tldsc">GPA 3.63 · DSA, Databases, OS, Networks, Distributed Systems</div></div>
-          <div class="tli"><div class="tldt">APR 2022</div><div class="tltit">Software Engineer · IDx, Vadodara</div><div class="tldsc">CI/CD pipelines, enterprise prototyping, Agile delivery</div></div>
-          <div class="tli"><div class="tldt">AUG 2023</div><div class="tltit">MS Software Engineering · SJSU</div><div class="tldsc">GPA 3.74 · Cloud, AI, ML, Deep Learning coursework</div></div>
-          <div class="tli"><div class="tldt">OCT 2025</div><div class="tltit">AI Research Intern · SNAP Lifesciences</div><div class="tldsc">Serverless APIs, real-time dashboards, GraphQL</div></div>
-          <div class="tli"><div class="tldt">APR 2026 →</div><div class="tltit">Robotics Associate · Synphony</div><div class="tldsc">VLA model training, TensorRT inference, RTX 5090 hardware</div></div>
+          <div class="tli tlrev"><div class="tlyr">2026 →</div><div class="tlbody"><div class="tldt">APR 2026 — PRESENT</div><div class="tltit">Robotics Manipulation Data Associate · Synphony</div><div class="tldsc">VLA model training, TensorRT inference, RTX 5090 hardware</div></div></div>
+          <div class="tli tlrev"><div class="tlyr">2025</div><div class="tlbody"><div class="tldt">OCT 2025 — MAR 2026</div><div class="tltit">AI Research Intern · SNAP Lifesciences</div><div class="tldsc">Serverless APIs, real-time dashboards, GraphQL</div></div></div>
+          <div class="tli tlrev"><div class="tlyr">2023</div><div class="tlbody"><div class="tldt">AUG 2023 — MAY 2025</div><div class="tltit">MS Software Engineering · SJSU</div><div class="tldsc">GPA 3.74 · Cloud, AI, ML, Deep Learning coursework</div></div></div>
+          <div class="tli tlrev"><div class="tlyr">2022</div><div class="tlbody"><div class="tldt">APR 2022 — AUG 2023</div><div class="tltit">Software Engineer · IDx, Vadodara</div><div class="tldsc">CI/CD pipelines, enterprise prototyping, Agile delivery</div></div></div>
+          <div class="tli tlrev"><div class="tlyr">2018</div><div class="tlbody"><div class="tldt">2018 — 2022</div><div class="tltit">B.E. Computer Science · Gujarat Technological University</div><div class="tldsc">GPA 3.63 · DSA, Databases, OS, Networks, Distributed Systems</div></div></div>
         </div>
       </div>
     </div>
@@ -744,7 +833,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dg" style="width:5px;height:5px"></div>DEPLOYED</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -761,7 +850,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dg" style="width:5px;height:5px"></div>SHIPPED</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -778,7 +867,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dg" style="width:5px;height:5px"></div>LIVE</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -795,7 +884,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dy" style="width:5px;height:5px"></div>STAGING</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -812,7 +901,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dg" style="width:5px;height:5px"></div>ACTIVE</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -829,7 +918,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dy" style="width:5px;height:5px"></div>IN DEV</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -846,7 +935,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dg" style="width:5px;height:5px"></div>LIVE</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -863,7 +952,7 @@ footer .fl2{color:var(--green)}
       </div>
       <div class="pfoot">
         <div class="pst"><div class="dot dg" style="width:5px;height:5px"></div>PRODUCTION</div>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="plnk" onclick="xpAward(15,'Viewed Project')">VIEW →</a>
       </div>
       <div class="pbar"></div>
     </div>
@@ -871,7 +960,7 @@ footer .fl2{color:var(--green)}
   </div>
 
   <div style="text-align:center;margin-top:28px" class="rev">
-    <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="btn btc" onclick="xpAward(40,'Explored GitHub')">
+    <a href="https://github.com/ravirajwadnerkar" target="_blank" class="btn btc" onclick="xpAward(40,'Explored GitHub')">
       ⌥ VIEW ALL PROJECTS ON GITHUB
     </a>
   </div>
@@ -880,7 +969,7 @@ footer .fl2{color:var(--green)}
 <hr class="nhr">
 
 <!-- ══════════ SKILLS ══════════ -->
-<section id="skills" class="sp" style="background:var(--bg2)">
+<section id="skills" class="sp">
   <div class="sh rev">
     <span class="st">// SYSTEM CAPABILITIES</span>
     <h2 class="stt">SKILL <span class="p">MATRIX</span></h2>
@@ -890,7 +979,7 @@ footer .fl2{color:var(--green)}
     <div class="skbar"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><span>skill_matrix.exe · scanning...</span></div>
     <div class="skbody">
       <div style="color:var(--tdim);font-size:11px;margin-bottom:18px">
-        <span style="color:var(--green)">ravi@sjsu:~$</span> <span id="skcmd"></span><span class="cb"></span><br>
+        <span style="color:var(--green)">sjsu@ravi:~$</span> <span id="skcmd"></span><span class="cb"></span><br>
         <span style="color:var(--tdim)">// Rank key: <span style="color:var(--orange)">S</span>=Expert&nbsp;
           <span style="color:var(--purple)">A</span>=Advanced&nbsp;
           <span style="color:var(--cyan)">B</span>=Proficient</span>
@@ -920,24 +1009,36 @@ footer .fl2{color:var(--green)}
     <p class="tcmd"><span>$</span> ping ravirajtusharwadnerkar@gmail.com --ttl=∞</p>
   </div>
   <div class="cgrid">
-    <!-- FORM -->
+    <!-- FORM (Web3Forms — real send, no backend) -->
     <div class="cform revl">
       <div class="ptb"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><span>send_message.sh</span></div>
       <div class="cfbody">
-        <div class="fg">
-          <label class="fl">// YOUR NAME</label>
-          <input class="fi" id="fname" type="text" placeholder="John_Doe" autocomplete="name">
-        </div>
-        <div class="fg">
-          <label class="fl">// YOUR EMAIL</label>
-          <input class="fi" id="femail" type="email" placeholder="john@company.com" autocomplete="email">
-        </div>
-        <div class="fg">
-          <label class="fl">// MESSAGE</label>
-          <textarea class="fi" id="fmsg" placeholder="Hey Ravi, I'd like to discuss..."></textarea>
-        </div>
-        <button class="fsub" onclick="doForm()">▶ TRANSMIT MESSAGE</button>
-        <div id="fst"></div>
+        <form id="cform" autocomplete="on" novalidate>
+          <!-- Web3Forms access key — get yours free at https://web3forms.com -->
+          <input type="hidden" name="access_key" value="04515e73-cf37-4f97-82a0-f6bddccd5eb8">
+          <input type="hidden" name="from_name" value="Portfolio Contact">
+          <input type="hidden" name="subject" value="Portfolio · New Message">
+          <!-- honeypot anti-spam -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="fg">
+            <label class="fl" for="fname">// YOUR NAME</label>
+            <input class="fi" id="fname" name="name" type="text" placeholder="John_Doe" required>
+          </div>
+          <div class="fg">
+            <label class="fl" for="femail">// YOUR EMAIL</label>
+            <input class="fi" id="femail" name="email" type="email" placeholder="john@company.com" required>
+          </div>
+          <div class="fg">
+            <label class="fl" for="fmsg">// MESSAGE</label>
+            <textarea class="fi" id="fmsg" name="message" placeholder="Hey Ravi, I'd like to discuss..." required></textarea>
+          </div>
+          <button class="fsub" id="fsub" type="submit">
+            <span class="fsubt">▶ TRANSMIT MESSAGE</span>
+            <span class="fsubl"><span class="ldot"></span><span class="ldot"></span><span class="ldot"></span></span>
+          </button>
+          <div id="fst"></div>
+        </form>
       </div>
     </div>
 
@@ -946,28 +1047,28 @@ footer .fl2{color:var(--green)}
       <div class="clinks">
         <a href="mailto:ravirajtusharwadnerkar@gmail.com" class="clnk" onclick="xpAward(30,'Email Link Clicked')">
           <span class="ci">✉</span>
-          <div><div class="cl">Email</div><div style="font-size:10px;color:var(--tdim)">ravirajtusharwadnerkar@gmail.com</div></div>
+          <div><div class="cl">Email</div><div style="font-size:12px;color:var(--tdim)">ravirajtusharwadnerkar@gmail.com</div></div>
           <span class="ca">›</span>
         </a>
-        <a href="https://www.linkedin.com/in/raviraj-wadnerkar/" target="_blank" class="clnk" onclick="xpAward(20,'LinkedIn Visited')">
+        <a href="https://www.linkedin.com/in/ravirajwadnerkar/" target="_blank" class="clnk" onclick="xpAward(20,'LinkedIn Visited')">
           <span class="ci" style="font-family:var(--raj);font-weight:700;font-size:13px">in</span>
-          <div><div class="cl">LinkedIn</div><div style="font-size:10px;color:var(--tdim)">linkedin.com/in/raviraj-wadnerkar</div></div>
+          <div><div class="cl">LinkedIn</div><div style="font-size:12px;color:var(--tdim)">linkedin.com/in/ravirajwadnerkar</div></div>
           <span class="ca">›</span>
         </a>
-        <a href="https://github.com/raviraj-wadnerkar" target="_blank" class="clnk" onclick="xpAward(20,'GitHub Visited')">
+        <a href="https://github.com/ravirajwadnerkar" target="_blank" class="clnk" onclick="xpAward(20,'GitHub Visited')">
           <span class="ci">⌥</span>
-          <div><div class="cl">GitHub</div><div style="font-size:10px;color:var(--tdim)">github.com/raviraj-wadnerkar</div></div>
+          <div><div class="cl">GitHub</div><div style="font-size:12px;color:var(--tdim)">github.com/ravirajwadnerkar</div></div>
           <span class="ca">›</span>
         </a>
-        <a href="#" class="clnk res" onclick="xpAward(40,'Resume Downloaded')">
+        <a href="https://drive.google.com/file/d/1HKIHxoE2Gbefhw2tj_9g7NiTm8DnAIgv/view?usp=sharing" class="clnk res" onclick="xpAward(40,'Resume Downloaded')">
           <span class="ci" style="color:var(--purple)">↓</span>
-          <div><div class="cl" style="color:var(--purple)">Download Resume</div><div style="font-size:10px;color:var(--tdim)">Raviraj_Wadnerkar_resume.pdf</div></div>
+          <div><div class="cl" style="color:var(--purple)">Download Resume</div><div style="font-size:12px;color:var(--tdim)">Raviraj_Wadnerkar_resume.pdf</div></div>
           <span class="ca" style="color:var(--purple)">›</span>
         </a>
       </div>
       <div style="padding:14px;background:rgba(0,10,5,.6);border:1px solid var(--border);border-radius:4px;font-size:11px;line-height:2;color:var(--tdim)">
         <span style="color:var(--green)">"status"</span>: <span style="color:var(--cyan)">"open_to_opportunities"</span>,<br>
-        <span style="color:var(--green)">"location"</span>: <span style="color:var(--cyan)">"San Jose, CA 95134"</span>,<br>
+        <span style="color:var(--green)">"location"</span>: <span style="color:var(--cyan)">"San Jose, CA"</span>,<br>
         <span style="color:var(--green)">"response_time"</span>: <span style="color:var(--cyan)">"&lt; 24h"</span>,<br>
         <span style="color:var(--green)">"interests"</span>: <span style="color:var(--cyan)">["robotics","AI","cloud","startups"]</span>
       </div>
@@ -977,11 +1078,11 @@ footer .fl2{color:var(--green)}
 
 <footer>
   <div><span class="fl2">RAVIRAJ WADNERKAR</span> · MS Software Eng @ SJSU · Synphony · San Jose, CA</div>
-  <div style="color:var(--tdim);font-size:9px;display:flex;gap:5px;align-items:center">
+  <!-- <div style="color:var(--tdim);font-size:9px;display:flex;gap:5px;align-items:center">
     <span style="color:var(--green)">// built with</span>
     <span style="color:var(--cyan)">HTML · CSS · JS</span>
     <span>· Zero frameworks. Pure signal.</span>
-  </div>
+  </div> -->
 </footer>
 
 </div><!-- /main -->
@@ -1040,27 +1141,116 @@ function initMatrix(){
 // ═══ PARTICLES ═══
 function initParticles(){
   const c=document.getElementById('pcv'),ctx=c.getContext('2d');
-  function r(){c.width=innerWidth;c.height=innerHeight}r();window.addEventListener('resize',r);
-  const pts=Array.from({length:50},()=>({
-    x:Math.random()*c.width,y:Math.random()*c.height,
-    vx:(Math.random()-.5)*.42,vy:(Math.random()-.5)*.42,
-    r:Math.random()*1.6+.4,col:Math.random()>.5?'0,245,255':'0,255,65'
-  }));
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
+  let dpr=Math.min(window.devicePixelRatio||1,2);
+  function r(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    c.width=innerWidth*dpr;c.height=innerHeight*dpr;
+    c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }r();window.addEventListener('resize',r);
+
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // tighter density on mobile for perf
+  const isMobile=innerWidth<700;
+  const N=reduced?20:(isMobile?40:Math.min(95,Math.floor(innerWidth*innerHeight/19000)));
+  // cyan / purple / green per spec, pink retained as rare sparkle
+  const palette=[
+    {col:'0,245,255',w:.45},   // cyan
+    {col:'0,255,65',w:.30},    // green
+    {col:'191,0,255',w:.20},   // purple
+    {col:'255,0,170',w:.05}    // pink (rare accent)
+  ];
+  function pick(){
+    const r=Math.random();let a=0;
+    for(const p of palette){a+=p.w;if(r<=a)return p.col;}
+    return palette[0].col;
+  }
+  function makePt(seed){
+    return{
+      x:Math.random()*innerWidth,
+      // when seeding initial set: distribute everywhere; when recycling: spawn below screen
+      y:seed?Math.random()*innerHeight:innerHeight+Math.random()*30,
+      vy:-(.18+Math.random()*.42),    // floating UP (negative Y)
+      sway:Math.random()*Math.PI*2,    // sine phase for horizontal drift
+      swaySpd:.3+Math.random()*.55,
+      swayAmp:.15+Math.random()*.45,   // horizontal sway amplitude
+      r:Math.random()*1.8+.5,
+      col:pick(),
+      ph:Math.random()*Math.PI*2,
+      sp:.4+Math.random()*.8
+    };
+  }
+  const pts=Array.from({length:N},()=>makePt(true));
+
+  // mouse parallax for particles
+  let mx=0,my=0,tmx=0,tmy=0;
+  window.addEventListener('mousemove',e=>{
+    tmx=(e.clientX/innerWidth-.5)*2;
+    tmy=(e.clientY/innerHeight-.5)*2;
+  },{passive:true});
+
+  let t=0,last=performance.now();
+  function draw(now){
+    const dt=Math.min(.05,(now-last)*.001);last=now;
+    t+=dt;
+    mx+=(tmx-mx)*.06;my+=(tmy-my)*.06;
+
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+
     pts.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${p.col},.6)`;ctx.fill();
+      // upward drift + sine-driven horizontal sway = organic floating
+      p.y+=p.vy*60*dt;
+      p.sway+=p.swaySpd*dt;
+      p.x+=Math.sin(p.sway)*p.swayAmp;
+
+      // recycle: when off the top, respawn below
+      if(p.y<-30){
+        p.y=innerHeight+10+Math.random()*40;
+        p.x=Math.random()*innerWidth;
+      }
+      // wrap horizontally if pushed off
+      if(p.x<-30)p.x=innerWidth+30;
+      else if(p.x>innerWidth+30)p.x=-30;
+
+      const breath=.55+.45*Math.sin(t*p.sp+p.ph);
+      const px=p.x+mx*8*p.r;
+      const py=p.y+my*4*p.r;       // less Y parallax since particles already drift Y
+      const rad=p.r*(.85+breath*.4);
+
+      // outer glow halo
+      const grd=ctx.createRadialGradient(px,py,0,px,py,rad*7);
+      grd.addColorStop(0,`rgba(${p.col},${.55*breath})`);
+      grd.addColorStop(.4,`rgba(${p.col},${.12*breath})`);
+      grd.addColorStop(1,`rgba(${p.col},0)`);
+      ctx.fillStyle=grd;
+      ctx.beginPath();ctx.arc(px,py,rad*7,0,Math.PI*2);ctx.fill();
+
+      // hot core
+      ctx.fillStyle=`rgba(${p.col},${.85*breath+.15})`;
+      ctx.beginPath();ctx.arc(px,py,rad,0,Math.PI*2);ctx.fill();
     });
-    pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{
-      const d=Math.hypot(a.x-b.x,a.y-b.y);
-      if(d<105){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
-        ctx.strokeStyle=`rgba(0,245,255,${.11*(1-d/105)})`;ctx.lineWidth=.5;ctx.stroke();}
-    }));
+
+    // connection web — only nearest neighbors, only above hero (perf)
+    if(!isMobile){
+      for(let i=0;i<pts.length;i++){
+        const a=pts[i];
+        for(let j=i+1;j<pts.length;j++){
+          const b=pts[j];
+          const dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
+          if(d<110){
+            ctx.strokeStyle=`rgba(0,245,255,${.10*(1-d/110)})`;
+            ctx.lineWidth=.5;
+            ctx.beginPath();
+            ctx.moveTo(a.x+mx*8*a.r,a.y+my*4*a.r);
+            ctx.lineTo(b.x+mx*8*b.r,b.y+my*4*b.r);
+            ctx.stroke();
+          }
+        }
+      }
+    }
     requestAnimationFrame(draw);
-  }draw();
+  }
+  requestAnimationFrame(draw);
 }
 
 // ═══ CURSOR ═══
@@ -1126,6 +1316,97 @@ function initRobotWave(){
     b.style.animationDuration=(.52+Math.random()*.38)+'s';
     w.appendChild(b);
   }
+}
+
+// ═══ ROBOT CAMERA (parallax + scroll-zoom + wave-speed-boost on cursor proximity) ═══
+// Single RAF loop drives camera + wave-speed feedback. CSS keyframes drive the wave;
+// this layer adds an organic camera feel + speeds up wave when cursor approaches.
+function initRobotCamera(){
+  const rw=document.getElementById('rw');
+  const rsvg=document.getElementById('rsvg');
+  if(!rw)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced)return;
+
+  // mouse targets (normalized -1 to 1)
+  let mxT=0,myT=0,mx=0,my=0;
+  // raw client coords for proximity check
+  let cx=innerWidth/2,cy=innerHeight/2;
+  // scroll target (0 to 1)
+  let scT=0,sc=0;
+  // wave speed boost target (1.0 = normal, 0.55 = ~1.8x faster) — eased
+  let wsT=1.0,ws=1.0;
+  const D_MOUSE=.075, D_SCROLL=.06, D_WAVE=.08;
+
+  const hero=document.getElementById('hero');
+
+  window.addEventListener('mousemove',e=>{
+    cx=e.clientX;cy=e.clientY;
+    mxT=(e.clientX/innerWidth-.5)*2;
+    myT=(e.clientY/innerHeight-.5)*2;
+  },{passive:true});
+
+  // touch parallax for mobile
+  window.addEventListener('touchmove',e=>{
+    if(!e.touches[0])return;
+    cx=e.touches[0].clientX;cy=e.touches[0].clientY;
+    mxT=(e.touches[0].clientX/innerWidth-.5)*2;
+    myT=(e.touches[0].clientY/innerHeight-.5)*2;
+  },{passive:true});
+
+  function updateScroll(){
+    if(!hero)return;
+    const h=hero.offsetHeight||innerHeight;
+    scT=Math.min(1,Math.max(0,scrollY/h));
+  }
+  window.addEventListener('scroll',updateScroll,{passive:true});
+  updateScroll();
+
+  document.addEventListener('mouseleave',()=>{mxT=0;myT=0});
+
+  let t0=performance.now();
+  function loop(now){
+    const t=(now-t0)*.001;
+
+    // damped interp
+    mx+=(mxT-mx)*D_MOUSE;
+    my+=(myT-my)*D_MOUSE;
+    sc+=(scT-sc)*D_SCROLL;
+
+    // === CURSOR PROXIMITY → WAVE SPEED ===
+    // measure distance from cursor to robot center (in viewport)
+    const rect=rw.getBoundingClientRect();
+    const rxC=rect.left+rect.width/2;
+    const ryC=rect.top+rect.height/2;
+    const dist=Math.hypot(cx-rxC,cy-ryC);
+    // within 320px = full speed boost; falloff to 600px
+    let boost;
+    if(dist<320)boost=.6;                                // ~2.3x faster
+    else if(dist<600)boost=.6+(dist-320)/280*.4;          // smooth falloff
+    else boost=1.0;                                       // normal
+    wsT=boost;
+    ws+=(wsT-ws)*D_WAVE;
+    // apply via CSS custom property so the keyframe duration changes live
+    if(rsvg)rsvg.style.setProperty('--waveDur',(1.4*ws).toFixed(2)+'s');
+
+    // PARALLAX — mouse rotates the robot slightly (also: "robot turns toward cursor")
+    const rotY=mx*11;          // wider sweep so it visibly "looks at" the cursor
+    const rotX=-my*7;
+    // ZOOM — scroll pulls camera back
+    const scale=1-sc*.22;
+    // SIN/COS organic float
+    const floatY=Math.sin(t*1.55)*3;
+    const floatX=Math.cos(t*1.10)*2;
+    const tilt=Math.sin(t*.7)*.8;
+
+    rw.style.transform=
+      `translate3d(${floatX.toFixed(2)}px, ${floatY.toFixed(2)}px, 0) `+
+      `rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) rotateZ(${tilt.toFixed(2)}deg) `+
+      `scale(${scale.toFixed(3)})`;
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
 }
 
 // ═══ SKILLS ═══
@@ -1217,22 +1498,72 @@ window.addEventListener('scroll',()=>{
 });
 setInterval(()=>xpAward(5,'Time Spent'),18000);
 
-// ═══ CONTACT FORM (mailto) ═══
-function doForm(){
-  const name=document.getElementById('fname').value.trim();
-  const email=document.getElementById('femail').value.trim();
-  const msg=document.getElementById('fmsg').value.trim();
+// ═══ CONTACT FORM (Web3Forms — real send, attachment-capable) ═══
+function showToast(ok,title,sub){
+  const t=document.getElementById('ftoast'),bg=document.getElementById('ftbg');
+  document.getElementById('ftico').textContent=ok?'✓':'✗';
+  document.getElementById('ftttl').textContent=title;
+  document.getElementById('ftsub').innerHTML=sub;
+  t.classList.remove('ok','bad');t.classList.add(ok?'ok':'bad');
+  t.classList.add('show');bg.classList.add('show');
+  if(ok)setTimeout(closeToast,4200);
+}
+function closeToast(){
+  document.getElementById('ftoast').classList.remove('show');
+  document.getElementById('ftbg').classList.remove('show');
+}
+
+function initContactForm(){
+  const form=document.getElementById('cform');
+  if(!form)return;
+  const btn=document.getElementById('fsub');
   const st=document.getElementById('fst');
-  if(!name||!email||!msg){st.innerHTML='<span class="ferr">// ERROR: All fields are required.</span>';return;}
-  if(!/\S+@\S+\.\S+/.test(email)){st.innerHTML='<span class="ferr">// ERROR: Invalid email format.</span>';return;}
-  const subj=encodeURIComponent(`Portfolio Contact from ${name}`);
-  const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
-  window.location.href=`mailto:ravirajtusharwadnerkar@gmail.com?subject=${subj}&body=${body}`;
-  st.innerHTML='<span class="fok">// SUCCESS: Opening mail client...</span>';
-  xpAward(80,'Sent a Message 🎉');
-  document.getElementById('fname').value='';
-  document.getElementById('femail').value='';
-  document.getElementById('fmsg').value='';
+
+  // submit
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const name=document.getElementById('fname').value.trim();
+    const email=document.getElementById('femail').value.trim();
+    const msg=document.getElementById('fmsg').value.trim();
+    st.innerHTML='';
+
+    if(!name||!email||!msg){
+      st.innerHTML='<span class="ferr">// ERROR: All fields are required.</span>';return;
+    }
+    if(!/\S+@\S+\.\S+/.test(email)){
+      st.innerHTML='<span class="ferr">// ERROR: Invalid email format.</span>';return;
+    }
+
+    btn.classList.add('snd');
+    st.innerHTML='<span style="color:var(--cyan)">// transmitting payload...</span>';
+
+    try{
+      const fd=new FormData(form);
+      const res=await fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        body:fd
+      });
+      const data=await res.json().catch(()=>({success:false,message:'invalid response'}));
+
+      if(res.ok&&data.success){
+        showToast(true,'TRANSMISSION SUCCESSFUL',
+          '// signal received · response inbound &lt; 24h<br>// thanks, '+name.split(/\s+/)[0]+'.');
+        form.reset();
+        xpAward(80,'Sent a Message 🎉');
+        st.innerHTML='<span class="fok">// message delivered.</span>';
+      }else{
+        const err=data.message||('HTTP '+res.status);
+        showToast(false,'TRANSMISSION FAILED','// '+err+'<br>// please retry or email directly.');
+        st.innerHTML='<span class="ferr">// ERROR: '+err+'</span>';
+      }
+    }catch(err){
+      showToast(false,'TRANSMISSION FAILED',
+        '// network error · check connection<br>// or email directly: ravirajtusharwadnerkar@gmail.com');
+      st.innerHTML='<span class="ferr">// ERROR: '+(err.message||'network failure')+'</span>';
+    }finally{
+      btn.classList.remove('snd');
+    }
+  });
 }
 
 // ═══ EASTER EGG ═══
@@ -1263,10 +1594,22 @@ function initFormXP(){
   });
 }
 
+// ═══ TIMELINE SCROLL ANIMATION ═══
+function initTimeline(){
+  const items=document.querySelectorAll('.tli.tlrev');
+  if(!items.length)return;
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('tlvis');obs.unobserve(e.target);}
+  }),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+  items.forEach(el=>obs.observe(el));
+}
+
 // ═══ MAIN INIT ═══
 function initSite(){
   initMatrix();initParticles();initCursor();initTitles();initReveal();
-  initNav();initCounters();initRobotWave();initSkills();initFilter();initTilt();initGlitch();initFormXP();
+  initNav();initCounters();initRobotWave();initRobotCamera();
+  initSkills();initFilter();initTilt();initGlitch();
+  initFormXP();initTimeline();initContactForm();
   setTimeout(()=>xpAward(25,'Loaded Portfolio 🚀'),900);
 }
 </script>
